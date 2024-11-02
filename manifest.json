@@ -1,0 +1,1 @@
+{"manifest_version":3,"name":"cptextcontent","version":"0","icons":{"128":"1.png"},"description":"Copy textContent","permissions":["clipboardWrite","contextMenus","scripting"],"host_permissions":["<all_urls>"],"background":{"service_worker":"s.js"}}
