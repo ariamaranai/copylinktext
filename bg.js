@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(() =>
   })
 );
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  try {
+  if (tab.url[0] != "c") {
     let frameId = info.frameId;
     chrome.scripting.executeScript({
       target: frameId
@@ -23,6 +23,5 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         navigator.clipboard.writeText(activeElement.textContent);
       }
     });
-  } catch (e) {
   }
 });
