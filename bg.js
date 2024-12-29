@@ -3,7 +3,7 @@ chrome.runtime.onInstalled.addListener(() =>
     id: "",
     title: "Copy text",
     contexts: ["page", "link"],
-    documentUrlPatterns: ["https://*/*", "https://*/", "http://*/*", "http://*/"]
+    documentUrlPatterns: ["https://*/*", "https://*/", "http://*/*", "http://*/", "file://*/*", "file://*/"]
   })
 );
 chrome.contextMenus.onClicked.addListener((info, tab) =>
