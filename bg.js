@@ -15,9 +15,10 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) =>
       primaryUrl: tab.url
     })).setting == "allow" ? "MAIN" : "ISOLATED",
     func: () => {
-      let activeElement = document.activeElement;
+      let d = document;
+      let activeElement = d.activeElement;
       let selection = getSelection();
-      let range = document.createRange();
+      let range = d.createRange();
       selection.removeAllRanges();
       range.selectNodeContents(activeElement);
       selection.addRange(range);
