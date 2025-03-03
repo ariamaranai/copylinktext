@@ -6,16 +6,13 @@ chrome.runtime.onInstalled.addListener(() =>
     documentUrlPatterns: ["https://*/*", "https://*/", "http://*/*", "http://*/", "file://*/*", "file://*/"]
   })
 );
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+chrome.contextMenus.onClicked.addListener((info, tab) => {
   try {
     let tabId = tab.id;
     chrome.scripting.executeScript({
       target: info.frameId
         ? { tabId, frameIds: [info.frameId] }
         : { tabId },
-      world: (await chrome.contentSettings.javascript.get({
-        primaryUrl: tab.url
-      })).setting == "allow" ? "MAIN" : "ISOLATED",
       func: () => {
         let d = document;
         let activeElement = d.activeElement;
