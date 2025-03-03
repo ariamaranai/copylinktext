@@ -8,10 +8,11 @@ chrome.runtime.onInstalled.addListener(() =>
 );
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   try {
+    let tabId = tab.id;
     chrome.scripting.executeScript({
       target: info.frameId
-        ? { tabId: tab.id, frameIds: [info.frameId] }
-        : { tabId: tab.id },
+        ? { tabId, frameIds: [info.frameId] }
+        : { tabId },
       world: (await chrome.contentSettings.javascript.get({
         primaryUrl: tab.url
       })).setting == "allow" ? "MAIN" : "ISOLATED",
@@ -25,6 +26,6 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         selection.addRange(range);
         navigator.clipboard.writeText(activeElement.textContent);
       }
-    })
+    });
   } catch (e) {}
 });
