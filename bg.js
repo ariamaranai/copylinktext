@@ -20,7 +20,6 @@ chrome.runtime.onInstalled.addListener(() =>
   chrome.contextMenus.create({
     id: "",
     title: "Copy text",
-    contexts: ["page", "link"],
-    documentUrlPatterns: ["https://*/*", "https://*/", "http://*/*", "http://*/", "file://*/*", "file://*/"]
+    contexts: ["page", "link"]
   })
 );
