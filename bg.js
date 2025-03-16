@@ -1,6 +1,6 @@
-chrome.contextMenus.onClicked.addListener((info, { id: tabId }) =>
+chrome.contextMenus.onClicked.addListener(({ frameId }, { id: tabId }) =>
   chrome.scripting.executeScript({
-    target: info.frameId ? { tabId, frameIds: [info.frameId] } : { tabId },
+    target: frameId ? { tabId, frameIds: [frameId] } : { tabId },
     func: () => {
       let d = document;
       let activeElement = d.activeElement;
