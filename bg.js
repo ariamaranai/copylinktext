@@ -18,6 +18,6 @@ chrome.runtime.onInstalled.addListener(() =>
     id: "",
     title: "Copy text",
     contexts: ["page", "link"],
-    documentUrlPatterns: ["https://*/*", "http://*/*", "file://*/*"]
+    documentUrlPatterns: ["https://*/*", "http://*/*", "file://*"]
   })
 );
