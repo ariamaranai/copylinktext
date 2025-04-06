@@ -1,16 +1,7 @@
 chrome.contextMenus.onClicked.addListener(({ frameId }, { id: tabId }) =>
-  chrome.scripting.executeScript({
+  chrome.userScripts.execute({
     target: frameId ? { tabId, frameIds: [frameId] } : { tabId },
-    func: () => {
-      let d = document;
-      let activeElement = d.activeElement;
-      let selection = getSelection();
-      let range = d.createRange();
-      selection.removeAllRanges();
-      range.selectNodeContents(activeElement);
-      selection.addRange(range);
-      navigator.clipboard.writeText(activeElement.textContent);
-    }
+    js: [{ code: "let d=document,e=d.activeElement,s=getSelection(),r=d.createRange();s.removeAllRanges(),r.selectNodeContents(e),s.addRange(r),navigator.clipboard.writeText(e.textContent)" }]
   }).catch(() => 0)
 );
 chrome.runtime.onInstalled.addListener(() =>
