@@ -7,8 +7,8 @@ chrome.contextMenus.onClicked.addListener(({ frameId }, { id: tabId }) =>
 chrome.runtime.onInstalled.addListener(() =>
   chrome.contextMenus.create({
     id: "",
-    title: "Copy text",
-    contexts: ["page", "link"],
+    title: "Copy link text",
+    contexts: ["link"],
     documentUrlPatterns: ["https://*/*", "http://*/*", "file://*"]
   })
 );
