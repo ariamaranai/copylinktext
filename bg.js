@@ -1,5 +1,7 @@
-chrome.contextMenus.onClicked.addListener(async ({ frameId }, { id: tabId }) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   try {
+    let tabId = tab.id;
+    let { frameId } = info;
     await chrome.userScripts.execute({
       target: frameId ? { tabId, frameIds: [frameId] } : { tabId },
       js: [{ code: "{let d=document,e=d.activeElement,s=getSelection(),r=d.createRange(s.removeAllRanges());r.selectNodeContents(e),s.addRange(r),d.execCommand('copy')}" }]
