@@ -12,7 +12,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         let r = d.createRange(s.removeAllRanges());
         r.selectNodeContents(e);
         s.addRange(r);
-        d.execCommand("copy");
+        return d.execCommand("copy");
       }
     })
   } catch {}
