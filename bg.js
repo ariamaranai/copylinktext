@@ -2,7 +2,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   try {
     let tabId = tab.id;
     let { frameId } = info;
-    await chrome.scripting.executeScript({
+    return await chrome.scripting.executeScript({
       target: frameId ? { tabId, frameIds: [frameId] } : { tabId },
       world: "MAIN",
       func: () => {
