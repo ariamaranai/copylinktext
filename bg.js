@@ -1,9 +1,8 @@
-chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  try {
-    let tabId = tab.id;
-    let { frameId } = info;
-    return await chrome.scripting.executeScript({
-      target: frameId ? { tabId, frameIds: [frameId] } : { tabId },
+{
+  let { contextMenus, runtime, scripting } = chrome;
+  contextMenus.onClicked.addListener(({ frameId }, { id }) =>
+    scripting.executeScript({
+      target: frameId ? { tabId: id, frameIds: [frameId] } : { tabId: id },
       world: "MAIN",
       func: () => {
         let d = document;
@@ -15,13 +14,13 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         return d.execCommand("copy");
       }
     })
-  } catch {}
-});
-chrome.runtime.onInstalled.addListener(() =>
-  chrome.contextMenus.create({
-    id: "",
-    title: "Copy link text",
-    contexts: ["link"],
-    documentUrlPatterns: ["https://*/*", "http://*/*", "file://*"]
-  })
-);
+  );
+  runtime.onInstalled.addListener(() =>
+    contextMenus.create({
+      id: "",
+      title: "Copy link text",
+      contexts: ["link"],
+      documentUrlPatterns: ["https://*/*", "http://*/*", "file://*"]
+    })
+  );
+}
